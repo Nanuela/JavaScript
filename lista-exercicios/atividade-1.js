@@ -24,7 +24,7 @@ console.log("metade", numero / 2);
 
 console.log("----------------")
 
-let nora1 = 8; 
+let nota1= 8; 
 let nota2 = 7; 
 let nota3 = 9;
 let media =(nota1 + nota2 + nota3)
@@ -33,7 +33,7 @@ console.log("média aritimética", media);
 
 console.log("----------------")
 
-let celcius = 30;
+let celsius = 30;
 let fahrenheit = (celsius *9/5 + 32); 
 
 console.log("temperatura fahrenheit:", fahrenheit); 
