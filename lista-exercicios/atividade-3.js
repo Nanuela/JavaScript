@@ -9,7 +9,7 @@ if (idade >= 18) {
 
 console.log("----------------")
 let numero = prompt("escolha um número:")
-let resultado = numero % 2 //resto
+let resultado = numero % 2 
 if (resultado == 0) {
     console.log("o número é par")
 } else {
