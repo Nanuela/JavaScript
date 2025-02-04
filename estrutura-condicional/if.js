@@ -27,5 +27,7 @@ let nota1 = prompt("quala primeira nota:")
 let nota2 = prompt("qual a segunda nota:")
 let total = (nota1 + nota2) / 2 
 if (total >= 7)  {
-    
+    console.log("você foi aprovado!")
+} else {
+    console.log("você foi reprovado")
 }
