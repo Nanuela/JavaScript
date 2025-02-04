@@ -23,7 +23,7 @@ if (resultado == 0) {
 console.log("----------------")
 //avaliação do aluno 
 
-let nota1 = prompt("quala primeira nota:")
+let nota1 = prompt("qual a primeira nota:")
 let nota2 = prompt("qual a segunda nota:")
 let total = (nota1 + nota2) / 2 
 if (total >= 7)  {
