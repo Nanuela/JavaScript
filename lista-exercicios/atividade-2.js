@@ -3,7 +3,7 @@ let num2 = 20;
 
 console.log(num1 > num2 ? "O primeiro número é maior que o segundo." : ""); 
 console.log(num1 < num2 ? "O primeiro número é menor que o segundo." : ""); 
-console.log(num1 === num2 ? "Os dois números são iguais." : "");
+console.log(num1 == num2 ? "Os dois números são iguais." : "");
 
 console.log("----------------")
 let idade = 18; 
@@ -18,13 +18,13 @@ console.log(idade >= 60 ? "Você é idoso." : "");
 console.log("----------------")
 let nomeUsuario = "admin"; 
 
-console.log(nomeUsuario === "admin" ? "Login bem-sucedido. Usuário é admin." : "Usuário comum.");
+console.log(nomeUsuario == "admin" ? "Login bem-sucedido. Usuário é admin." : "Usuário comum.");
 
 console.log("----------------")
 let numero = 15; 
 
-console.log(numero % 3 === 0 ? "O número é divisível por 3." : ""); 
-console.log(numero % 5 === 0 ? "O número é divisível por 5." : "");
+console.log(numero % 3 == 0 ? "O número é divisível por 3." : ""); 
+console.log(numero % 5 == 0 ? "O número é divisível por 5." : "");
 
 console.log("----------------")
 let saldo = 500; 
