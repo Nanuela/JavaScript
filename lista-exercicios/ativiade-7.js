@@ -51,6 +51,11 @@ while (repeticao < 5) {
 }
 
 console.log("----------------")
-let nome = prompt("Digete seu nome:")
+let name = prompt ("Escreva seu nome")
+let numero = prompt ("Escreva um numero")
+while (numero >= 1){
+    console.log (name)
+    numero --
+}
 
 
