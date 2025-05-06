@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+  }
+  
+  body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url('./fundo gatinhos.avif') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #fdfaf6;
+    color: #5e4b3c; /* marrom claro/bege escuro para contraste */
+  }
+  
+  header {
+    padding: 20px;
+    font-size: 1.8rem;
+    color: #7d6752;
+    text-shadow: 1px 1px 2px #ffffffaa;
+    text-align: center;
+  }
+  
+  main {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 250, 240, 0.6); /* bege clarinho com transparência */
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+  }
+  
+  .bxs-chevron-up-circle {
+    color: #d2bba0;
+  }
+  
+  .bxs-chevron-down-circle {
+    color: #f0e0d6;
+  }
+  
+  .resumo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .resumo > div {
+    color: #7a5e47;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .novo-item {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .divDesc, .divTipo, .divValor {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .novoItem > button {
+    background-color: #e6d3be;
+    color: #5e4b3c;
+    border: none;
+    padding: 0 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    height: 34px;
+    transition: background-color 0.3s;
+  }
+  
+  .novoItem > button:hover {
+    background-color: #d8c2ad;
+  }
+  
+  input, select {
+    padding: 6px 12px;
+    border: 1px solid #e8dacb;
+    background-color: #fefaf6cc;
+    border-radius: 20px;
+    color: #5e4b3c;
+  }
+  
+  .tabela-itens {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  table {
+    width: 95%;
+    border-collapse: collapse;
+    color: #5e4b3c;
+    background: rgba(255, 248, 240, 0.6);
+    backdrop-filter: blur(4px);
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  th {
+    text-align: left;
+    padding: 10px;
+    color: #5c4838;
+    background-color: rgba(245, 230, 215, 0.6);
+  }
+  
+  td {
+    padding: 10px;
+  }
+  
+  i {
+    font-size: 22px;
+    color: #bfa58a;
+  }
+  
+  .columnAcao {
+    width: 40px;
+    text-align: center;
+  }
+  
+  .columnAcao > button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .columnValor {
+    width: 30%;
+  }
+  
+  .columnTipo {
+    width: 80px;
+    text-align: center;
+  }
+  
