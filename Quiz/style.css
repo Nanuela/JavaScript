@@ -1,26 +1,22 @@
-/* Importando a fonte Questrial do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* Resetando as configurações padrão do navegador */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Questrial', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* Estilizando o corpo da página */
 body {
-    background: linear-gradient(to right, #f8c8dc, #f6a9b4); /* Gradiente suave de rosa claro para rosa escuro */
+    background: url('fundo.avif') center/cover no-repeat, linear-gradient(to right, #f8c8dc, #f6a9b4);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Container principal do quiz */
 .container {
-    background-color: rgba(255, 255, 255, 0.8); /* Fundo com leve transparência */
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -28,80 +24,70 @@ body {
     width: 90%;
 }
 
-/* Estilo do título */
 h1 {
     text-align: center;
-    color: #d43c7e; /* Rosa forte para o título */
+    color: #d43c7e;
     margin-bottom: 2rem;
 }
 
-/* Estilo do placar */
 #placar {
     display: flex;
     justify-content: space-around;
     margin-bottom: 2rem;
     padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.5); /* Placar semitransparente */
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 8px;
     font-size: 1.1rem;
 }
 
-/* Estilo dos números do placar */
 #placar span {
     font-weight: bold;
 }
 
-/* Cor do número de acertos */
 #acertos {
-    color: #ff66b2; /* Rosa mais claro para acertos */
+    color: #ff66b2;
 }
 
-/* Cor do número de erros */
 #erros {
-    color: #e74c3c; /* Vermelho para erros */
+    color: #e74c3c;
 }
 
-/* Estilo da pergunta */
 #pergunta {
     font-size: 1.4rem;
     margin-bottom: 1.5rem;
-    color: #d43c7e; /* Rosa forte para o texto das perguntas */
+    color: #d43c7e;
     text-align: center;
 }
 
-/* Estilo das opções de resposta */
 .opcao {
     display: block;
     width: 100%;
     padding: 15px;
     margin: 10px 0;
-    background-color: #fce4ec; /* Rosa muito claro nas opções */
+    background-color: #fce4ec;
     border: 2px solid #f8a0c1;
     border-radius: 8px;
     cursor: pointer;
-    color: #d43c7e;  
+    color: #d43c7e;
     transition: all 0.3s;
 }
 
-/* Efeito quando passar o mouse sobre a opção */
 .opcao:hover {
-    background-color: #f8a0c1; /* Cor mais intensa no hover */
+    background-color: #f8a0c1;
 }
 
-/* Estilo da opção selecionada */
 .opcao.selecionada {
-    background-color: #ff66b2; /* Rosa claro para a opção selecionada */
+    background-color: #ff66b2;
     color: white;
-    border-color: #d43c7e; /* Borda rosa mais escura */
+    border-color: #d43c7e;
 }
 
-/* Estilo dos botões */
 button {
     display: block;
     width: 100%;
     padding: 12px;
     margin-top: 1rem;
-    background-color: #d43c7e; /* Rosa forte no botão */
+    background-color: #d43c7e;
     color: white;
     border: none;
     border-radius: 8px;
@@ -110,30 +96,25 @@ button {
     transition: background-color 0.3s;
 }
 
-/* Efeito de hover no botão */
 button:hover {
-    background-color: #e91e63; /* Cor mais escura ao passar o mouse */
+    background-color: #e91e63;
 }
 
-/* Classe para esconder elementos */
 .esconder {
     display: none;
 }
 
-/* Estilo da tela de pontuação final */
 #pontuacao {
     text-align: center;
 }
 
-/* Estilo do título da pontuação final */
 #pontuacao h2 {
-    color: #d43c7e; /* Título rosa forte */
+    color: #d43c7e;
     margin-bottom: 1rem;
 }
 
-/* Estilo do texto da pontuação final */
 #pontuacao p {
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    color: #d43c7e; /* Texto rosa para o resultado final */
+    color: #d43c7e;
 }
