@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>🐱 Gatinho Caçador de Ração</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: url('https://img.pikbest.com/backgrounds/20190903/cute-adorable-cat-kitten-cartoon-doodle-seamless-pattern-background-v_1542245jpg!sw800') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 192, 203, 0.4); 
+      border: 2px solid #d36d9e; 
+      border-radius: 20px;
+      padding: 2rem 3rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    h1 {
+      color: #c96ca2;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="number"] {
+      padding: 0.7rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 2px solid #d36d9e;
+      width: 80%;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      padding: 0.7rem 1.5rem;
+      font-size: 1.1rem;
+      margin: 0.5rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff99cc;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff66aa;
+    }
+
+    #mensagem {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      color: #5a3e49;
+    }
+
+    #tentativas, #historico {
+      margin-top: 1rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🐾 Gatinho Caçador de Ração 🐟</h1>
+    <p>O cheirinho está por aí... ajude o gatinho a encontrar a tigela de ração escondida (1 a 100)!</p>
+
+    <input type="number" id="palpite" placeholder="Ronrone um número..." min="1" max="100"><br>
+
+    <button onclick="tentarPalpite()" id="botaoTentar">😺 Tentar</button>
+    <button onclick="reiniciarJogo()">🔁 Reiniciar</button>
+
+    <div id="mensagem"></div>
+    <div id="tentativas"></div>
+    <div id="historico"></div>
+  </div>
+
+  <script>
+    let numeroSecreto;
+    let tentativasRestantes;
+    let historicoPalpites = [];
+
+    function gerarNumero() {
+      return Math.floor(Math.random() * 100) + 1;
+    }
+
+    function iniciarJogo() {
+      numeroSecreto = gerarNumero();
+      tentativasRestantes = 10;
+      historicoPalpites = [];
+      document.getElementById('mensagem').textContent = '';
+      document.getElementById('tentativas').textContent = '😼 Tentativas restantes: 10';
+      document.getElementById('historico').textContent = '';
+      document.getElementById('palpite').disabled = false;
+      document.getElementById('botaoTentar').disabled = false;
+      document.getElementById('palpite').value = '';
+    }
+
+    function tentarPalpite() {
+      const palpite = parseInt(document.getElementById('palpite').value);
+      if (isNaN(palpite) || palpite < 1 || palpite > 100) {
+        document.getElementById('mensagem').textContent = '🐾 Miau! Só vale números de 1 a 100!';
+        return;
+      }
+
+      historicoPalpites.push(palpite);
+      tentativasRestantes--;
+
+      if (palpite === numeroSecreto) {
+        document.getElementById('mensagem').textContent = `🎉 MIAU! Você encontrou a ração escondida no número ${numeroSecreto}!`;
+        document.getElementById('palpite').disabled = true;
+        document.getElementById('botaoTentar').disabled = true;
+      } else if (tentativasRestantes === 0) {
+        document.getElementById('mensagem').textContent = `💤 Acabaram os miados! A ração estava no ${numeroSecreto}.`;
+        document.getElementById('palpite').disabled = true;
+        document.getElementById('botaoTentar').disabled = true;
+      } else {
+        let dica = palpite < numeroSecreto ? '😻 Mais ração! Mia mais alto!' : '🙀 Muita ração! Mia mais baixo!';
+        document.getElementById('mensagem').textContent = dica;
+      }
+
+      document.getElementById('tentativas').textContent = `😼 Tentativas restantes: ${tentativasRestantes}`;
+      document.getElementById('historico').textContent = `🐾 Palpites: ${historicoPalpites.join(', ')}`;
+      document.getElementById('palpite').value = '';
+    }
+
+    function reiniciarJogo() {
+      iniciarJogo();
+    }
+
+    window.onload = iniciarJogo;
+  </script>
+
+</body>
+</html>
