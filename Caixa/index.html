@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulador de Caixa - Estúdio de Fotografia</title>
+  <style>
+    :root {
+      --fundo: #efe7dc;
+      --marrom: #7b5e45;
+      --marrom-claro: #d6c3af;
+      --destaque: #f5ece3;
+      --hover: #5a3f2d;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background-image: url('https://cdn.awsli.com.br/800x800/1238/1238683/produto/57371962/7bf244daa7.jpg'); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #3d2b1f;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      border: 2px solid rgba(139, 115, 85, 0.2);
+      border-radius: 20px;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      max-width: 650px;
+      margin: 60px auto;
+      padding: 40px;
+    }
+
+    h2, h3 {
+      text-align: center;
+      color: var(--marrom);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 20px;
+      color: #4d392a;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 10px;
+      border: 1px solid #cbb8a1;
+      background-color: #fdfaf7;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background: linear-gradient(135deg, #7b5e45, #a9896c);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #5a3f2d, #8c6d57);
+    }
+
+    ul {
+      padding-left: 0;
+      list-style: none;
+      margin-top: 15px;
+    }
+
+    li {
+      background-color: var(--destaque);
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      font-size: 16px;
+      border-left: 5px solid var(--marrom);
+    }
+
+    #voucher, #descontoMsg, #troco {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 12px;
+      color: #6e4a2e;
+      font-size: 16px;
+    }
+
+    ::placeholder {
+      color: #998675;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📸 Simulador de Caixa - Estúdio de Fotografia</h2>
+
+    <label>Escolha um serviço:</label>
+    <select id="servico">
+      <option value="" disabled selected>Selecione um serviço</option>
+      <option value="Ensaio Fotográfico|150">📷 Ensaio Fotográfico - R$150,00</option>
+      <option value="Revelação de Fotos|2">🖼️ Revelação de Fotos - R$2,00 (por foto)</option>
+      <option value="Edição Profissional|80">🖌️ Edição Profissional - R$80,00</option>
+      <option value="Aluguel de Figurino|50">👗 Aluguel de Figurino - R$50,00</option>
+      <option value="Impressão Personalizada|30">🖨️ Impressão Personalizada - R$30,00</option>
+    </select>
+
+    <label>Quantidade:</label>
+    <input type="number" id="quantidade" placeholder="Ex: 1" min="1"/>
+
+    <button onclick="adicionarItem()">Adicionar Serviço</button>
+    <button onclick="limparTudo()" style="background: #b47142;">Limpar Compra</button>
+
+    <h3>🧾 Serviços Selecionados:</h3>
+    <ul id="listarItens"></ul>
+
+    <h3>Total: R$ <span id="total">0.00</span></h3>
+    <div id="descontoMsg"></div>
+    <div id="voucher"></div>
+
+    <label>Valor Pago (R$):</label>
+    <input type="number" id="valorPago" step="0.01" placeholder="Ex: 300.00" />
+
+    <button onclick="calcularTroco()">Calcular Troco</button>
+    <h3>Troco: R$ <span id="troco">0.00</span></h3>
+  </div>
+
+  <script>
+    let total = 0;
+    let servicosAdicionados = 0;
+
+    function adicionarItem() {
+      const select = document.getElementById("servico");
+      const quantidade = parseInt(document.getElementById("quantidade").value);
+      const valorTexto = select.value;
+
+      if (!valorTexto || isNaN(quantidade) || quantidade <= 0) {
+        alert("Preencha todos os campos corretamente.");
+        return;
+      }
+
+      const [nomeServico, precoUnitario] = valorTexto.split("|");
+      const preco = parseFloat(precoUnitario);
+      const subtotal = preco * quantidade;
+
+      const lista = document.getElementById("listarItens");
+      const item = document.createElement("li");
+      item.textContent = `${nomeServico} - R$${preco.toFixed(2)} x ${quantidade} = R$${subtotal.toFixed(2)}`;
+      lista.appendChild(item);
+
+      total += subtotal;
+      servicosAdicionados++;
+      aplicarDescontoEAtualizarTotal();
+      verificarVoucher();
+
+      document.getElementById("quantidade").value = "";
+      select.selectedIndex = 0;
+    }
+
+    function aplicarDescontoEAtualizarTotal() {
+      let totalComDesconto = total;
+      const descontoMsg = document.getElementById("descontoMsg");
+
+      if (servicosAdicionados >= 3) {
+        totalComDesconto *= 0.9;
+        descontoMsg.textContent = "💸 Desconto de 10% aplicado por contratar 3 ou mais serviços!";
+      } else {
+        descontoMsg.textContent = "";
+      }
+
+      document.getElementById("total").textContent = totalComDesconto.toFixed(2);
+    }
+
+    function verificarVoucher() {
+      const totalFinal = parseFloat(document.getElementById("total").textContent);
+      const voucher = document.getElementById("voucher");
+      voucher.textContent = totalFinal > 350 ? "🎁 Ganhe um voucher para próxima visita!" : "";
+    }
+
+    function calcularTroco() {
+      const valorPago = parseFloat(document.getElementById("valorPago").value);
+      const totalFinal = parseFloat(document.getElementById("total").textContent);
+
+      if (isNaN(valorPago) || valorPago < totalFinal) {
+        alert("Valor pago inválido ou insuficiente.");
+        return;
+      }
+
+      const troco = valorPago - totalFinal;
+      document.getElementById("troco").textContent = troco.toFixed(2);
+    }
+
+    function limparTudo() {
+      document.getElementById("listarItens").innerHTML = "";
+      document.getElementById("total").textContent = "0.00";
+      document.getElementById("valorPago").value = "";
+      document.getElementById("troco").textContent = "0.00";
+      document.getElementById("voucher").textContent = "";
+      document.getElementById("descontoMsg").textContent = "";
+      total = 0;
+      servicosAdicionados = 0;
+    }
+  </script>
+</body>
+</html>
