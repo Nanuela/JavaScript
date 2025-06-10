@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartões para Você 💖</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      width: 220px;
+      height: 220px; /* Quadrado */
+      perspective: 1000px;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+      cursor: pointer;
+    }
+
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 15px;
+      padding: 20px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    .birthday .card-front { background: #c774e8; }
+    .birthday .card-back { background: #9b59b6; }
+
+    .christmas .card-front { background: #b94f4f; }
+    .christmas .card-back { background: #922b21; }
+
+    .mothers .card-front { background: #f1948a; }
+    .mothers .card-back { background: #cd6155; }
+
+    .valentines .card-front { background: #fd79a8; }
+    .valentines .card-back { background: #e84393; }
+
+    .newyear .card-front { background: #74b9ff; }
+    .newyear .card-back { background: #0984e3; }
+
+    .easter .card-front { background: #ffeaa7; color: #333; }
+    .easter .card-back { background: #fab1a0; color: #333; }
+
+    .teacher .card-front { background: #81ecec; color: #333; }
+    .teacher .card-back { background: #00cec9; }
+
+    .apology .card-front { background: #b2bec3; color: #333; }
+    .apology .card-back { background: #636e72; }
+
+    .motivational .card-front { background: #55efc4; color: #333; }
+    .motivational .card-back { background: #00b894; }
+
+    .junina .card-front { background: #ffeaa7; color: #333; }
+    .junina .card-back { background: #fbc531; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="card birthday">
+    <div class="card-inner">
+      <div class="card-front">🎉 Seu dia chegou!</div>
+      <div class="card-back">Parabéns, meu amor! Que venham mais sorrisos e sonhos realizados! 🎂💖</div>
+    </div>
+  </div>
+
+  <div class="card christmas">
+    <div class="card-inner">
+      <div class="card-front">🎄 Natal com você</div>
+      <div class="card-back">Você é meu presente mais lindo de todos os Natais ✨🎁</div>
+    </div>
+  </div>
+
+  <div class="card mothers">
+    <div class="card-inner">
+      <div class="card-front">💐 Dia das Mães</div>
+      <div class="card-back">Pra sua mãe que é a melhor! E pra você, futura mamãe mais linda ❤️</div>
+    </div>
+  </div>
+
+  <div class="card valentines">
+    <div class="card-inner">
+      <div class="card-front">💕 Só você!</div>
+      <div class="card-back">Tô com você hoje e sempre. Você é meu lugar seguro 💑💘</div>
+    </div>
+  </div>
+
+  <div class="card newyear">
+    <div class="card-inner">
+      <div class="card-front">🎆 Vem, novo ano!</div>
+      <div class="card-back">Mais um ano juntinhos, criando memórias lindas! 💫</div>
+    </div>
+  </div>
+
+  <div class="card easter">
+    <div class="card-inner">
+      <div class="card-front">🐣 Páscoa fofa</div>
+      <div class="card-back">Chocolate, carinho e você grudada em mim! 🍫🥰</div>
+    </div>
+  </div>
+
+  <div class="card teacher">
+    <div class="card-inner">
+      <div class="card-front">📚 Dia dos profs</div>
+      <div class="card-back">Respeito demais quem ensina com o coração! 💜✏️</div>
+    </div>
+  </div>
+
+  <div class="card apology">
+    <div class="card-inner">
+      <div class="card-front">😔 Foi mal</div>
+      <div class="card-back">Errei sim... mas quero consertar tudo com você 💞</div>
+    </div>
+  </div>
+
+  <div class="card motivational">
+    <div class="card-inner">
+      <div class="card-front">🚀 Vai!</div>
+      <div class="card-back">Você é luz, força e merece o mundo todo! 💪✨</div>
+    </div>
+  </div>
+
+  <div class="card junina">
+    <div class="card-inner">
+      <div class="card-front">🎊 Arraiá</div>
+      <div class="card-back">Bora dançar coladinho, comer tudo e dar risada? 🌽💃</div>
+    </div>
+  </div>
+</body>
+</html>
+
