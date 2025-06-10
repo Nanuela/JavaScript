@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>O Livro que Muda a Realidade 📚✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: url('https://f.i.uol.com.br/fotografia/2024/08/08/172312713766b4d5617b487_1723127137_3x2_md.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.75);
+            color: #4d3a00;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 700px;
+            box-shadow: 0 0 20px rgba(255, 223, 100, 0.4);
+        }
+        h1 {
+            font-family: 'Handlee', cursive;
+            font-size: 30px;
+            color: #d47f00;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(255, 240, 200, 0.8);
+        }
+        .story {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        .choice-button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 12px auto;
+            padding: 14px 24px;
+            background-color: #ffb347;
+            color: #4d2600;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Handlee', cursive;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(100, 60, 0, 0.2);
+        }
+        .choice-button:hover {
+            background-color: #ff9900;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>O Livro que Muda a Realidade 📚✨</h1>
+        <div id="story" class="story"></div>
+        <div id="choices"></div>
+    </div>
+
+    <script>
+        const storyElement = document.getElementById("story");
+        const choicesElement = document.getElementById("choices");
+
+        const storyData = {
+            start: {
+                text: "Em uma tarde chuvosa, você se abriga em uma livraria antiga e encontra um livro empoeirado. Ao abri-lo, letras douradas brilham e você percebe: tudo que escreve nele... se torna real. 📖✨",
+                choices: [
+                    { text: "Escrever que você ganha superpoderes", next: "poderes" },
+                    { text: "Escrever que você é transportado para um mundo mágico", next: "mundo" }
+                ]
+            },
+            poderes: {
+                text: "Você sente uma energia crescer dentro de si. Agora pode voar e manipular o tempo! Mas cada uso altera a realidade ao seu redor... ⏳🦸‍♂️",
+                choices: [
+                    { text: "Usar os poderes para salvar vidas", next: "heroi" },
+                    { text: "Usar os poderes para enriquecer", next: "ego" }
+                ]
+            },
+            mundo: {
+                text: "Luzes dançam ao seu redor e você desperta em uma terra mística. Um enorme dragão vigia um portal reluzente. 🐉✨",
+                choices: [
+                    { text: "Escrever que o dragão se torna seu aliado", next: "dragao" },
+                    { text: "Escrever que o dragão desaparece", next: "atalho" }
+                ]
+            },
+            heroi: {
+                text: "Você se torna um símbolo de esperança, mas o preço é alto. A linha entre você e o livro desaparece — agora é parte da história eterna. 🌟",
+                choices: []
+            },
+            ego: {
+                text: "Sua ambição cresce e o mundo se dobra à sua vontade. Mas o livro ganha consciência... e começa a escrever sozinho. 📕⚠️",
+                choices: []
+            },
+            dragao: {
+                text: "Com seu novo aliado, você descobre a Biblioteca das Realidades — onde o primeiro livro foi escrito. 🏰📚",
+                choices: [
+                    { text: "Destruir o livro original e encerrar a magia", next: "fim_livre" },
+                    { text: "Jurar proteger o livro para sempre", next: "guardiao" }
+                ]
+            },
+            atalho: {
+                text: "O dragão some e você segue por um túnel florido até um jardim onde pensamentos tomam forma. Mas o lugar começa a desaparecer. 🌸⏳",
+                choices: [
+                    { text: "Escrever para restaurar o jardim", next: "fim_jardim" },
+                    { text: "Escrever sua volta ao mundo real", next: "saida" }
+                ]
+            },
+            fim_livre: {
+                text: "O livro vira cinzas em suas mãos. Você retorna ao mundo real... mas a sensação de que tudo ainda pode mudar permanece. ✨📖",
+                choices: []
+            },
+            guardiao: {
+                text: "Você se torna o Guardião da Realidade, orientando quem encontra o livro. Você agora escreve destinos. 🔮📘",
+                choices: []
+            },
+            fim_jardim: {
+                text: "Com sua escrita, o jardim floresce. Você decide permanecer e criar mundos, tornando-se o autor de infinitas histórias. 🌺📝",
+                choices: []
+            },
+            saida: {
+                text: "De volta ao mundo real, você guarda o livro consigo. Agora sabe: basta escrever... e a realidade muda. 📓✨",
+                choices: []
+            }
+        };
+
+        function renderScene(sceneKey) {
+            const scene = storyData[sceneKey];
+            storyElement.textContent = scene.text;
+            choicesElement.innerHTML = "";
+
+            scene.choices.forEach(choice => {
+                const button = document.createElement("button");
+                button.textContent = choice.text;
+                button.className = "choice-button";
+                button.onclick = () => renderScene(choice.next);
+                choicesElement.appendChild(button);
+            });
+        }
+
+        renderScene("start");
+    </script>
+</body>
+</html>
