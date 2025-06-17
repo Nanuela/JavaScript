@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jukebox dos Gatinhos</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #fce4ec;
+      color: #444;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .background-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.5s ease;
+    }
+
+    .container {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      transition: all 0.5s ease;
+    }
+
+    h1 {
+      color: #e91e63;
+      margin-bottom: 20px;
+      font-size: 36px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin: 8px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      background-color: #f8bbd0;
+      color: #333;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #f48fb1;
+    }
+
+    #imagem {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    #foto {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 10px solid #fff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+
+    #musicaAtual {
+      font-weight: bold;
+      font-size: 20px;
+      color: #ad1457;
+      margin-bottom: 15px;
+    }
+
+    #audio {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    #voltarBtn {
+      margin-top: 10px;
+    }
+
+    @keyframes girar {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .girando {
+      animation: girar 6s linear infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-overlay" id="bgOverlay"></div>
+
+  <div class="container" id="menuInicial">
+    <h1>🐾 Jukebox dos Gatinhos 🐾</h1>
+    <p>Escolha como seu gatinho interior está se sentindo:</p>
+
+    <div>
+      <button onclick="tocar('alegria')">Alegria 🐱</button>
+      <button onclick="tocar('tristeza')">Tristeza 😿</button>
+      <button onclick="tocar('aventura')">Aventura 🐾</button>
+      <button onclick="tocar('amor')">Amor 💖</button>
+      <button onclick="tocar('misterio')">Mistério 🐈‍⬛</button>
+      <button onclick="tocar('calma')">Calma 🌙</button>
+      <button onclick="tocar('animacao')">Animação 😸</button>
+      <button onclick="tocar('suspense')">Suspense 👀</button>
+    </div>
+  </div>
+
+  <div id="imagem">
+    <img src="" alt="Imagem tema" id="foto">
+    <div id="musicaAtual"></div>
+    <audio src="" id="audio" controls></audio>
+    <button id="voltarBtn" onclick="voltar()">🔙 Voltar</button>
+  </div>
+
+  <script>
+    function tocar(tipo) {
+      const audio = document.getElementById("audio");
+      const foto = document.getElementById("foto");
+      const musicaAtual = document.getElementById("musicaAtual");
+      const bgOverlay = document.getElementById("bgOverlay");
+      const menu = document.getElementById("menuInicial");
+      const imagemDiv = document.getElementById("imagem");
+
+      let musica = "";
+      let imagem = "";
+      let fundo = "";
+      let nomeMusica = "";
+
+      switch (tipo) {
+        case "alegria":
+          musica = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+          imagem = "https://img.freepik.com/vetores-premium/ilustracao-em-vetor-icone-de-desenho-animado-de-gato-fofo_549857-7536.jpg";
+          fundo = "https://img.freepik.com/vetores-premium/ilustracao-do-conjunto-de-racas-de-gatos-engracados-dos-desenhos-animados_112554-243.jpg";
+          nomeMusica = "Gato feliz";
+          break;
+        case "tristeza":
+          musica = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3";
+          imagem = "https://img.freepik.com/vetores-premium/ilustracao-de-um-gato-triste_267331-761.jpg?semt=ais_hybrid&w=740";
+          fundo = "https://img.freepik.com/vetores-premium/ilustracao-do-conjunto-de-racas-de-gatos-engracados-dos-desenhos-animados_112554-243.jpg";
+          nomeMusica = "Gato triste";
+          break;
+        case "aventura":
+          musica = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3";
+          imagem = "https://img.freepik.com/vetores-premium/ilustracao-em-vetor-icone-de-desenho-animado-de-gato-fofo_549857-7545.jpg";
+          fundo = "https://img.freepik.com/vetores-premium/ilustracao-do-conjunto-de-racas-de-gatos-engracados-dos-desenhos-animados_112554-243.jpg";
+          nomeMusica = "Passeio!";
+          break;
+        case "amor":
+          musica = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3";
+          imagem = "https://img.freepik.com/vetores-premium/gato-bonito-com-coracao-de-amor-ilustracao-de-desenho-animado-de-gato-do-dia-de-sao-valentim_1023984-1845.jpg?w=360";
+          fundo = "https://img.freepik.com/vetores-premium/ilustracao-do-conjunto-de-racas-de-gatos-engracados-dos-desenhos-animados_112554-243.jpg";
+          nomeMusica = "Gatinho amando";
+          break;
+        case "misterio":
+          musica = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3";
+          imagem = "https://thumbs.dreamstime.com/b/detetive-do-gato-com-uma-lupa-de-bonitinho-em-chap%C3%A9u-e-casaco-animal-engra%C3%A7ado-busca-ilustra%C3%A7%C3%A3o-caracteres-desenho-vetorial-331526149.jpg";
+          fundo = "https://img.freepik.com/vetores-premium/ilustracao-do-conjunto-de-racas-de-gatos-engracados-dos-desenhos-animados_112554-243.jpg";
+          nomeMusica = "Gatinho detetive";
+          break;
+        case "calma":
+          musica = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3";
+          imagem = "https://img.freepik.com/vetores-premium/bonito-desenho-animado-dormindo-gato-ruivo-em-ilustracao-vetorial-vetor-animal-isolado-estilo-de-desenho-animado-plano_520253-77.jpg";
+          fundo = "https://img.freepik.com/vetores-premium/ilustracao-do-conjunto-de-racas-de-gatos-engracados-dos-desenhos-animados_112554-243.jpg";
+          nomeMusica = "Gatinho calmo dormindo";
+          break;
+        case "animacao":
+          musica = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3";
+          imagem = "https://img.freepik.com/vetores-premium/ilustracao-em-vetor-icone-de-desenho-animado-de-gato-fofo_549857-7522.jpg";
+          fundo = "https://img.freepik.com/vetores-premium/ilustracao-do-conjunto-de-racas-de-gatos-engracados-dos-desenhos-animados_112554-243.jpg";
+          nomeMusica = "Gatinho animado";
+          break;
+        case "suspense":
+          musica = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3";
+          imagem = "https://img.freepik.com/vetores-premium/desenho-de-gato-assustado-caindo-de-altura_435121-169.jpg?w=360";
+          fundo = "https://img.freepik.com/vetores-premium/ilustracao-do-conjunto-de-racas-de-gatos-engracados-dos-desenhos-animados_112554-243.jpg";
+          nomeMusica = "A queda do gatinho";
+          break;
+        default:
+          return;
+      }
+
+      menu.style.display = "none";
+      imagemDiv.style.display = "flex";
+      foto.src = imagem;
+      foto.classList.add("girando");
+      musicaAtual.textContent = `🎵 Tocando: ${nomeMusica}`;
+      bgOverlay.style.backgroundImage = `url('${fundo}')`;
+      bgOverlay.style.opacity = "0.5";
+
+      audio.src = musica;
+      audio.play();
+    }
+
+    function voltar() {
+      const audio = document.getElementById("audio");
+      const foto = document.getElementById("foto");
+      const musicaAtual = document.getElementById("musicaAtual");
+      const bgOverlay = document.getElementById("bgOverlay");
+      const menu = document.getElementById("menuInicial");
+      const imagemDiv = document.getElementById("imagem");
+
+      audio.pause();
+      audio.currentTime = 0;
+      foto.src = "";
+      foto.classList.remove("girando");
+      musicaAtual.textContent = "";
+      bgOverlay.style.opacity = "0";
+      imagemDiv.style.display = "none";
+      menu.style.display = "block";
+    }
+  </script>
+</body>
+</html>
