@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avatar LEGO</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background:#fcc676;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #c62828;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .box {
+      background-color: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 140px;
+    }
+
+    .label {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .controle {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .controle button {
+      background-color: #ffc107;
+      border: none;
+      padding: 6px 12px;
+      margin: 0 5px;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    #avatar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      width: fit-content;
+      margin: 0 auto 30px;
+      gap: 20px;
+    }
+
+    #avatar-cabelo {
+      width: 200px;
+      margin-top: -10px;
+    }
+
+    #avatar-rosto {
+      width: 120px;
+    }
+
+    #avatar-corpo {
+      width: 200px;
+    }
+
+    #baixar {
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Monte seu Avatar LEGO</h1>
+
+  <div class="container">
+   
+    <div class="box">
+      <div class="label">Cabelo</div>
+      <img id="preview-cabelo" src="imagem/cabelo/cabelo1.png" width="100" />
+      <div class="controle">
+        <button onclick="troca('cabelo', -1)">◀</button>
+        <button onclick="troca('cabelo', 1)">▶</button>
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="label">Rosto</div>
+      <img id="preview-rosto" src="imagem/rosto/rosto1.png" width="100" />
+      <div class="controle">
+        <button onclick="troca('rosto', -1)">◀</button>
+        <button onclick="troca('rosto', 1)">▶</button>
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="label">Corpo</div>
+      <img id="preview-corpo" src="imagem/corpo/corpo1.png" width="100" />
+      <div class="controle">
+        <button onclick="troca('corpo', -1)">◀</button>
+        <button onclick="troca('corpo', 1)">▶</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="avatar">
+    <img src="imagem/cabelo/cabelo1.png" id="avatar-cabelo">
+    <img src="imagem/rosto/rosto1.png" id="avatar-rosto">
+    <img src="imagem/corpo/corpo1.png" id="avatar-corpo">
+  </div>
+
+  <button id="baixar" onclick="baixarAvatar()">Baixar Avatar</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    const opcoes = {
+      cabelo: 4, 
+      rosto: 2,
+      corpo: 5
+    };
+
+    const estado = {
+      cabelo: 1,
+      rosto: 1,
+      corpo: 1
+    };
+
+    function troca(parte, direcao) {
+      estado[parte] += direcao;
+      if (estado[parte] < 1) estado[parte] = opcoes[parte];
+      if (estado[parte] > opcoes[parte]) estado[parte] = 1;
+
+      const caminho = `imagem/${parte}/${parte}${estado[parte]}.png`;
+
+      document.getElementById(`preview-${parte}`).src = caminho;
+      document.getElementById(`avatar-${parte}`).src = caminho;
+    }
+
+    function baixarAvatar() {
+      html2canvas(document.querySelector("#avatar")).then(canvas => {
+        const link = document.createElement('a');
+        link.download = "avatar_lego.png";
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+  </script>
+</body>
+</html>
